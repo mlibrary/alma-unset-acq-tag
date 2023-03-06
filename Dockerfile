@@ -9,7 +9,7 @@ ARG UID=1000
 ARG GID=1000
 
 
-LABEL maintainer="uniqname@umich.edu"
+LABEL maintainer="dfulmer@umich.edu"
 
 ## Install Vim (optional)
 #RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \

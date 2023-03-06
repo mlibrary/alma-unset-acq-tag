@@ -1,24 +1,47 @@
-# ruby-docker-boilerplate
+# Alma Unset Acq Tag
 
-Boilerplate code for starting a ruby project with docker / docker-compose
+Scripts for creating an Itemized set of Process Type=Acquisition only Physical Titles and changing the Management Tags to "Don't Publish".
 
-## Set up
+## Setting up Alma Unset Acq Tag
 
-Run the setup script
+Clone the repo
+
 ```
-./init.sh
+git clone git@github.com:dfulmer/alma-unset-acq-tag.git
+cd alma-unset-acq-tag
 ```
 
-This will:
+copy .env-example to .env
 
-* copy `.env-example` to `.env` 
-* enable the precommit hook which wil lint the code before committing.  Uncomment
-  those lines in `.git/hooks/precommit` to enable running tests.
-* build the docker image
-* install the gems
+```
+cp .env-example .env
+```
 
-The script does not overwrite `.env` or `/git/hooks/precommit`.
+edit .env with actual environment variables
 
-## Background
-This repository goes with this documentation:
-https://mlit.atlassian.net/wiki/spaces/LD/pages/2404090314/Getting+Started+with+Docker+and+Docker-Compose 
+build container
+```
+docker-compose build
+```
+
+bundle install
+```
+docker-compose run --rm app bundle install
+```
+
+start container
+```
+docker-compose up -d
+```
+
+## Creating a set and changing the Management Tags
+
+1. This command will run the create_set.rb script, which combines two sets into an Itemized set:
+```
+docker-compose run --rm app bundle exec ruby create_set.rb
+```
+
+2. This command will run the set_tags.rb script, which will change the Management Tags of the newly created set to "Don't Publish":
+```
+docker-compose run --rm app bundle exec ruby set_tags.rb
+```
