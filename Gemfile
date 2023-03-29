@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 source "https://rubygems.pkg.github.com/mlibrary" do
   gem "alma_rest_client", "2.0.0"
-end 
+end
 
 group :development, :test do
   gem "pry"
