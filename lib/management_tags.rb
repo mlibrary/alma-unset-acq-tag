@@ -1,4 +1,3 @@
-require "faraday"
 require "logger"
 require "alma_rest_client"
 module ManagementTags
@@ -61,8 +60,8 @@ module ManagementTags
     # puts response.body
     logger.info "Response status: " + response.status.to_s
     begin
-      logger.info "Set created id: " + JSON.parse(response.body)["id"]
-      logger.info "Set created name: " + JSON.parse(response.body)["name"]
+      logger.info "Set created id: " + response.body["id"]
+      logger.info "Set created name: " + response.body["name"]
     rescue Exception => e
       logger.info "Alma didn't return the expected information"
     end
