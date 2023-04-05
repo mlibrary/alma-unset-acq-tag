@@ -39,14 +39,17 @@ module ManagementTags
   def self.run
     logger = Logger.new($stdout)
 
-    # set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
-    # set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2
-    set1 = 31338526090006381 # set of one record
-    set2 = 31338526140006381 # set of one record
+     set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
+     set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2
+    # set1 = 31338526090006381 # set of one record
+    # set2 = 31338526140006381 # set of one record
     operator = "NOT" # AND OR NOT
 
     logger.info "Combining sets: #{set1} #{operator} #{set2}."
-    response = AlmaRestClient.client.post("conf/sets?combine=#{operator}&set1=#{set1}&set2=#{set2}", body: contents)
+    conn = Faraday.new do |f|
+      f.options.timeout = 600
+    end
+    response = AlmaRestClient.client(conn).post("conf/sets?combine=#{operator}&set1=#{set1}&set2=#{set2}", body: contents)
     # response = connection.post do |req|
     # req.url "https://api-na.hosted.exlibrisgroup.com/almaws/v1/conf/sets?combine=#{operator}&set1=#{set1}&set2=#{set2}"
     # req.headers[:content_type] = 'application/json'
