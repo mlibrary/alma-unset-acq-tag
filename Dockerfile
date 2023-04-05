@@ -3,7 +3,6 @@ FROM ruby:${RUBY_VERSION}
 
 # Last digit is needed to get bundler to install the latest.
 # Check https://rubygems.org/gems/bundler/versions for the latest version.
-ARG BUNDLER_VERSION=2.4.5 
 ARG UNAME=app
 ARG UID=1000
 ARG GID=1000
@@ -15,7 +14,7 @@ LABEL maintainer="dfulmer@umich.edu"
 #RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 #  vim-tiny
 
-RUN gem install bundler:${BUNDLER_VERSION}
+RUN gem install bundler
 
 RUN groupadd -g ${GID} -o ${UNAME}
 RUN useradd -m -d /app -u ${UID} -g ${GID} -o -s /bin/bash ${UNAME}
