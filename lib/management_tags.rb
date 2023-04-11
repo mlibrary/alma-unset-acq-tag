@@ -39,10 +39,10 @@ module ManagementTags
   def self.run
     logger = Logger.new($stdout)
 
-     set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
-     set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2
-    # set1 = 31338526090006381 # set of one record
-    # set2 = 31338526140006381 # set of one record
+    # set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
+    # set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2
+     set1 = 31338526090006381 # set of one record
+     set2 = 31338526140006381 # set of one record
     operator = "NOT" # AND OR NOT
 
     logger.info "Combining sets: #{set1} #{operator} #{set2}."

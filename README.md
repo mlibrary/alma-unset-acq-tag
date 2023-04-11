@@ -45,3 +45,10 @@ docker-compose run --rm app bundle exec ruby create_set.rb
 ```
 docker-compose run --rm app bundle exec ruby set_tags.rb
 ```
+
+## Running Tests
+
+1. This command will run the tests:
+```
+docker-compose run --rm app bundle exec rspec
+```
