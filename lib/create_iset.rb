@@ -1,6 +1,6 @@
 require "logger"
 require "alma_rest_client"
-module ManagementTags
+module CreateSet
   # This script creates an itemized set by combining the two sets: OCLC_every_physical_title_with_acquisition_v2 NOT OCLC_every_physical_title_except_acquisition_v2.
   # The combined set which results consists of all acq-only Physical Titles in Alma.
   def self.contents
