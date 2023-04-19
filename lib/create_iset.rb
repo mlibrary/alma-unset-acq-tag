@@ -36,8 +36,7 @@ module CreateSet
     }.to_json
   end
 
-  def self.run
-    logger = Logger.new($stdout)
+  def self.run(logger = Logger.new($stdout))
 
     # set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
     # set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2

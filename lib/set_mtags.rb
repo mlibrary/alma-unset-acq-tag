@@ -1,11 +1,10 @@
 require "logger"
 require "alma_rest_client"
 module SetTags
-  def self.run
-    logger = Logger.new($stdout)
+  def self.run(time = Time.now, logger = Logger.new($stdout))
+    
 
     # Retrieve the setid of the set to be used with the Set Management Tags job
-    time = Time.now
     formatteddate = time.strftime("%m/%d/%Y")
     unaddsetnamepattern = "OCLC_all_physical_titles_v2 - Combined - #{formatteddate}" # this is the combined set with the bigger set
     # unaddsetnamepattern = "OCLC_every_physical_title_with_acquisition_v2 - Combined - #{formatteddate}" #this is the combined set with the smaller set
@@ -33,30 +32,30 @@ module SetTags
 
     flag_action = "NONE"
     job_name = "Synchronize Bib records with OCLC - do not publish"
-    contents = <<-CONTENT
+    contents =
       {
-        "parameter": [
+        "parameter"=> [
             {
-              "name": {
-                "value": "task_MmsTaggingParams_boolean"
+              "name"=> {
+                "value"=> "task_MmsTaggingParams_boolean"
               },
-              "value": "#{flag_action}"
+              "value"=> "#{flag_action}"
             },
             {
-              "name": {
-                "value": "set_id"
+              "name"=> {
+                "value"=> "set_id"
               },
-              "value": "#{unaddsetid}"
+              "value"=> "#{unaddsetid}"
             },
             {
-              "name": {
-                "value": "job_name"
+              "name"=> {
+                "value"=> "job_name"
               },
-              "value": "#{job_name} - #{unaddsetname}"
+              "value"=> "#{job_name} - #{unaddsetname}"
             }
           ]
-        }
-    CONTENT
+        }.to_json
+    
     response = AlmaRestClient.client.post("conf/jobs/M12889770000231?op=run", body: contents)
 
     # response2 = connection.post do |req|
