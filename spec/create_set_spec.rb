@@ -3,7 +3,7 @@ describe CreateSet do
   context "run" do
     it "runs" do
       logger = instance_double(Logger, info:nil)
-      stub_alma_post_request(url: "conf/sets?combine=NOT&set1=31338526090006381&set2=31338526140006381", input: CreateSet.contents)
+      stub_alma_post_request(url: "conf/sets?combine=NOT&set1=#{ENV.fetch("SET_WITH_ALL_TITLES")}&set2=#{ENV.fetch("SET_WITHOUT_ACQ")}", input: CreateSet.contents)
       expect(CreateSet.run(logger)).to eq(true)
     end
   end
