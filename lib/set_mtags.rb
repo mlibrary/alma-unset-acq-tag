@@ -74,6 +74,6 @@ module SetTags
     # puts " "
     # puts response2.status
     logger.info "Set Management Tags job submitted."
-    nil
+    true
   end
 end
