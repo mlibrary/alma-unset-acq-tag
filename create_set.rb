@@ -1,2 +1,2 @@
-require_relative "./lib/management_tags"
-ManagementTags.run
+require_relative "./lib/create_iset"
+CreateSet.run

@@ -1,6 +1,6 @@
 require "logger"
 require "alma_rest_client"
-module ManagementTags
+module CreateSet
   # This script creates an itemized set by combining the two sets: OCLC_every_physical_title_with_acquisition_v2 NOT OCLC_every_physical_title_except_acquisition_v2.
   # The combined set which results consists of all acq-only Physical Titles in Alma.
   def self.contents
@@ -36,13 +36,14 @@ module ManagementTags
     }.to_json
   end
 
-  def self.run
-    logger = Logger.new($stdout)
+  def self.run(logger = Logger.new($stdout))
 
-     set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
-     set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2
+    # set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
+    # set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2
     # set1 = 31338526090006381 # set of one record
     # set2 = 31338526140006381 # set of one record
+    set1 = ENV.fetch("SET_WITH_ALL_TITLES")
+    set2 = ENV.fetch("SET_WITHOUT_ACQ")
     operator = "NOT" # AND OR NOT
 
     logger.info "Combining sets: #{set1} #{operator} #{set2}."
