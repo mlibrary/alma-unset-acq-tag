@@ -28,4 +28,7 @@ WORKDIR /app
 
 ##For a production build copy the app files and run bundle install
 COPY --chown=${UID}:${GID} . /app
-RUN bundle install
+
+RUN --mount=type=secret,id=gh_package_read_token \
+  read_token="$(cat /run/secrets/gh_package_read_token)" \
+  && BUNDLE_RUBYGEMS__PKG__GITHUB__COM=${read_token} bundle install
