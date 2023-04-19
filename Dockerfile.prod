@@ -20,7 +20,6 @@ RUN groupadd -g ${GID} -o ${UNAME}
 RUN useradd -m -d /app -u ${UID} -g ${GID} -o -s /bin/bash ${UNAME}
 RUN mkdir -p /gems && chown ${UID}:${GID} /gems
 
-USER $UNAME
 
 ENV BUNDLE_PATH /gems
 
@@ -32,3 +31,5 @@ COPY --chown=${UID}:${GID} . /app
 RUN --mount=type=secret,id=gh_package_read_token \
   read_token="$(cat /run/secrets/gh_package_read_token)" \
   && BUNDLE_RUBYGEMS__PKG__GITHUB__COM=${read_token} bundle install
+
+USER $UNAME
