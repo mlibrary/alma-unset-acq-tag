@@ -37,7 +37,6 @@ module CreateSet
   end
 
   def self.run(logger = Logger.new($stdout))
-
     # set1 = 31337200330006381 #OCLC_every_physical_title_with_acquisition_v2
     # set2 = 22766924310006381 #OCLC_every_physical_title_except_acquisition_v2
     # set1 = 31338526090006381 # set of one record
@@ -66,7 +65,7 @@ module CreateSet
     begin
       logger.info "Set created id: " + response.body["id"]
       logger.info "Set created name: " + response.body["name"]
-    rescue Exception => e
+    rescue
       logger.info "Alma didn't return the expected information"
     end
     true
