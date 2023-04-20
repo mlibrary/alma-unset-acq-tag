@@ -1,4 +1,4 @@
-name: Build latest from main and AutoDeploy to Testing and Staging
+name: Build latest from main and AutoDeploy to Workshop
 
 on:
   workflow_run:
