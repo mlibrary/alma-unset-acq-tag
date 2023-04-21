@@ -17,7 +17,7 @@ on:
 jobs:
   build-unstable:
     name: Build unstable ${{ github.event.inputs.tag }}
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@fixing-workflows
     with:
       image_name: ${{ vars.IMAGE_NAME }}
       tag: ${{ github.event.inputs.tag }}
