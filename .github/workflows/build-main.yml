@@ -16,12 +16,12 @@ jobs:
       image_name: ${{ vars.IMAGE_NAME }}
     secrets: inherit
 
-  deploy:
+  deploy-workshop:
     needs: build-unstable
     uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
     with:
       image: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}-unstable:${{ github.sha }}
-      file: environments/unset-acq-tags/app-image.txt
+      file: environments/unset-acq-tags/workshop/app-image.txt
       CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
       CONFIG_REPO_RW_INSTALL_ID: ${{ vars.CONFIG_REPO_RW_INSTALL_ID }}
       CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
