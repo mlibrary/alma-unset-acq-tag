@@ -8,7 +8,7 @@ on:
 jobs:
   build-production:
     name: Build production ${{ github.event.release.tag_name }}
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-production.yml@main
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-production.yml@fixing-workflows
     with:
       image_name: ${{ vars.IMAGE_NAME }}
       tag: ${{ github.event.release.tag_name }}
