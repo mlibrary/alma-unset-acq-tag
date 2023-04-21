@@ -10,7 +10,7 @@ on: push
 jobs:
   build-unstable:
     name: Build unstable ${{ github.sha }}
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    #if: ${{ github.event.workflow_run.conclusion == 'success' }}
     uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@fixing-workflows
     with:
       image_name: ${{ vars.IMAGE_NAME }}
