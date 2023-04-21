@@ -1,0 +1,36 @@
+name: Manual Deploy Unstable
+
+on:
+  workflow_dispatch:
+    inputs:
+      tanka_env:
+        description: 'tanka environment'
+        required: true
+        type: choice
+        default: "workshop"
+        options:
+          - "workshop"
+      tag:
+        description: tag
+        required: true
+
+jobs:
+  build-unstable:
+    name: Build unstable ${{ github.event.inputs.tag }}
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
+    with:
+      image_name: ${{ vars.IMAGE_NAME }}
+      tag: ${{ github.event.inputs.tag }}
+    secrets: inherit
+
+  deploy:
+    needs: build-unstable
+    name: Deploy to ${{ github.event.inputs.tanka_env }}
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
+    with:
+      image: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}-unstable:${{ github.event.inputs.tag }}
+      file: environments/unset-acq-tags/${{ github.event.inputs.tanka_env }}/app-image.txt
+      CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
+      CONFIG_REPO_RW_INSTALL_ID: ${{ vars.CONFIG_REPO_RW_INSTALL_ID }}
+      CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
+    secrets: inherit
