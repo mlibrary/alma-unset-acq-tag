@@ -1,10 +1,11 @@
 name: Build latest from main and AutoDeploy to Workshop
 
-on:
-  workflow_run:
-    workflows: [ 'Run Tests' ]
-    branches: [ 'main' ]
-    types: [ completed ]
+on: push
+#on:
+  #workflow_run:
+    #workflows: [ 'Run Tests' ]
+    #branches: [ 'main' ]
+    #types: [ completed ]
 
 jobs:
   build-unstable:
