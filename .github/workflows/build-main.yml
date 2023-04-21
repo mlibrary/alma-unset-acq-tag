@@ -10,7 +10,7 @@ on: push
 jobs:
   build-unstable:
     name: Build unstable ${{ github.sha }}
-    #if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@fixing-workflows
     with:
       image_name: ${{ vars.IMAGE_NAME }}
@@ -22,7 +22,7 @@ jobs:
     with:
       image: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}-unstable:${{ github.sha }}
       file: environments/unset-acq-tags/app-image.txt
-      CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_KEY }}
+      CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
       CONFIG_REPO_RW_INSTALL_ID: ${{ vars.CONFIG_REPO_RW_INSTALL_ID }}
       CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
     secrets: inherit
