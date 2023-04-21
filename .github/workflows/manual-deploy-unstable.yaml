@@ -26,7 +26,7 @@ jobs:
   deploy:
     needs: build-unstable
     name: Deploy to ${{ github.event.inputs.tanka_env }}
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@fixing-workflows
     with:
       image: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}-unstable:${{ github.event.inputs.tag }}
       file: environments/unset-acq-tags/${{ github.event.inputs.tanka_env }}/app-image.txt
