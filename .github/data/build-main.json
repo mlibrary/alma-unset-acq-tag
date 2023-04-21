@@ -1,7 +1,0 @@
-[
-  {
-    "environment": "unset-acq-tags/workshop",
-    "key": "app",
-    "image": "%%IMAGE%%"
-  }
-]
